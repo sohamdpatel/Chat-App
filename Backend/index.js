@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 // config dotenv
 dotenv.config({path: './config/.env',});
 import connectDB from './config/connnectDB.js';
@@ -15,7 +15,7 @@ app.use(cors({
 }));
 // json config
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 const PORT = process.env.PORT || 8080;
 
 // connect to mongodb
