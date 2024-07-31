@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import { CheckEmail, CheckPassword, Home, Register } from "./pages"
+import { CheckEmail, CheckPassword, Forgotpassword, Home, Register } from "./pages"
 import Message from './component/Message.jsx';
 import AuthLayouts from './layout/AuthLayouts.jsx';
 
@@ -16,6 +16,7 @@ const router = createBrowserRouter(
       <Route path='register' element={<AuthLayouts><Register/></AuthLayouts>}/>
       <Route path='email' element={<AuthLayouts><CheckEmail/></AuthLayouts>}/>
       <Route path='password' element={<AuthLayouts><CheckPassword/></AuthLayouts>}/>
+      <Route path='forgot-password' element={<AuthLayouts><Forgotpassword/></AuthLayouts>}/>
     </Route>
   )
 )

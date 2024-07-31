@@ -8,7 +8,6 @@ import getUserDetailFromToken from "../utils/getUserDetailFromToken.js";
 async function registerUser(req, res) {
     try {
         const { name, email, password, profile_pic} = req.body;
-
         // check if user already exists
         const checkUser = await UserModel.findOne({ email })
 
@@ -73,16 +72,16 @@ async function checkUserPassword(req,res) {
     try {
         const {password,userId} = req.body
         // check user
-        const checkPassword = await UserModel.findById(userId)
+        const checkUser = await UserModel.findById(userId)
 
-        if (!checkPassword) {
+        if (!checkUser) {
             return res.status(400).json({
                 message: "User doesn't exists",
                 error: true
             })
         }
         // compare password
-        const isMatch = await bcryptjs.compare(password, checkPassword.password)
+        const isMatch = await bcryptjs.compare(password, checkUser.password)
         if (!isMatch) {
             return res.status(400).json({
                 message: "Password is incorrect",
@@ -91,14 +90,13 @@ async function checkUserPassword(req,res) {
         }
         // generate token
         const tokenData = {
-            id:checkPassword._id,
-            email: checkPassword.email
+            id:checkUser._id,
+            email: checkUser.email
         }
         const token = jwt.sign(tokenData, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
         // set cookie option
         const cookieOption = {
             http: true,
-            secure: true
         }
 
         return res.cookie('token',token,cookieOption).status(200).json({
