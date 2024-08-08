@@ -10,7 +10,6 @@ function Register() {
   const {register, handleSubmit, control} = useForm()
   const [image, setImage] = useState()
   const navigate = useNavigate()
-  const [uploadedImage,setUploadedImage] = useState()
   const profile_pic = useWatch({
     name: "profile_pic", // watch the Image field
     control, // control comes from useForm
@@ -19,7 +18,6 @@ function Register() {
   const submit = async (data) => {
     console.log(data);
     const uploadedimage = await uploadFile(data.profile_pic[0])
-    setUploadedImage(uploadedimage);
 
     try {
       console.log(uploadedimage);

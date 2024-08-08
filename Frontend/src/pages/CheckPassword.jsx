@@ -5,10 +5,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Avatar from '../component/avatar'
+import { useDispatch } from 'react-redux';
+import { setToken } from '../store/userSlice';
 function CheckPassword() {  
 
 
   const {register, handleSubmit, control} = useForm()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   console.log(location);
@@ -29,7 +32,8 @@ function CheckPassword() {
       })
       console.log(res);
       toast.success(res.data.message)
-      if(!res.data.error){
+      if(res.data.success){
+        dispatch(setToken(res.data.token))
         navigate('/')
       }
     } catch (error) {

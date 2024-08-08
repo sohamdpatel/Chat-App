@@ -6,6 +6,8 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import { CheckEmail, CheckPassword, Forgotpassword, Home, Register } from "./pages"
 import Message from './component/Message.jsx';
 import AuthLayouts from './layout/AuthLayouts.jsx';
+import { Provider } from'react-redux';
+import store from './store/store';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +25,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+      <RouterProvider router={router}/>
+    </Provider>
   </React.StrictMode>,
 )
