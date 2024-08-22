@@ -151,10 +151,13 @@ async function logout(req, res) {
 // update user
 async function updateUser(req, res) {
     try {
+        console.log(req);
         const token = req.cookies.token || ""
-
+        console.log(token);
+        
         const user = await getUserDetailFromToken(token)
-
+        console.log(user);
+        
         const {name, profile_pic} = req.body
         const updateUser = await UserModel.findByIdAndUpdate(user._id, {name, profile_pic})
         const updatedUser = await UserModel.findById(updateUser._id)

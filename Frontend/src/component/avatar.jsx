@@ -32,7 +32,7 @@ const Avatar = ({userId,name,imageUrl,width,height,className}) => {
     const randomNumber = Math.floor(Math.random() * 9)
 
   return (
-    <div className={`text-slate-800  rounded-full font-bold relative ${className}`} style={{width : width+"px", height : height+"px" }}>
+    <div className={`text-slate-800 border-[3px] rounded-full font-bold relative ${className}`} style={{width : width+"px", height : height+"px" }}>
         {
             imageUrl ? (
                 <img
@@ -44,7 +44,7 @@ const Avatar = ({userId,name,imageUrl,width,height,className}) => {
                 />
             ) : (
                 name ? (
-                    <div  style={{width : width+"px", height : height+"px" }} className={`overflow-hidden rounded-full flex justify-center items-center text-lg ${bgColor[randomNumber]}`}>
+                    <div  style={{width : width+"px", height : height+"px" }} className={`overflow-hidden rounded-full flex justify-center items-center text-lg ${bgColor[randomNumber]} ${className}`}>
                         {avatarName}
                     </div>
                 ) :(

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,17 +18,27 @@ function Home() {
       const res = await axios.get('http://localhost:3000/api/user/getuser',{
         withCredentials: true
       })
-      dispatch(setUser(res.data.data))
-      if(res.data.logout){
+      console.log(res);
+      
+      if(res.data.data.logout){
+        console.log("hello");
+        
         dispatch(logout())
         navigate('/email')
       }
+      dispatch(setUser(res.data.data))
       toast.success(res.data.message)
+      
     } catch (error) {
+      // console.log(error);
+      
       toast.error(error.response.data.message)
     }
   }
-
+  const location = useLocation()
+  const basePath = location.pathname === '/'
+  console.log(basePath);
+  
   useEffect(() => {
     getUserDetails()
   }, [])
@@ -37,7 +47,7 @@ function Home() {
       <section className=' bg-white'>
         <Sidebar/>
       </section>
-      <section>
+      <section className={`${basePath && 'hidden'}`}>
         <Outlet/>
       </section>
     </div>
