@@ -34,6 +34,7 @@ function CheckPassword() {
       toast.success(res.data.message)
       if(res.data.success){
         dispatch(setToken(res.data.token))
+        localStorage.setItem('token', res.data.token)
         navigate('/')
       }
     } catch (error) {

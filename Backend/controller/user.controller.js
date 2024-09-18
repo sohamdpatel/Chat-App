@@ -174,4 +174,31 @@ async function updateUser(req, res) {
     }
 }
 
-export {registerUser,checkUserEmail,checkUserPassword,getUserDetails,logout,updateUser}
+async function searchUser(req,res) {
+    try {
+        const { search } = req.body
+        console.log(search);
+        const query = new RegExp(search,'i' ,'g')
+
+        const user = await UserModel.find({
+            "$or": [
+                {name: query},
+                {email: query}
+            ]
+        })
+        console.log(user);
+        
+        return res.status(200).json({
+            message: "User searched successfully",
+            data: user,
+            success: true
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error:true
+        })
+    }
+}
+
+export {registerUser,checkUserEmail,checkUserPassword,getUserDetails,logout,updateUser,searchUser}

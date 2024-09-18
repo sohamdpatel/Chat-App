@@ -1,10 +1,11 @@
 import React from 'react'
 import { PiUserCircle } from "react-icons/pi";
+import { useSelector } from 'react-redux';
 
 const Avatar = ({userId,name,imageUrl,width,height,className}) => {
 
     //Amit Prajapati
-
+    const onlineUser = useSelector(state => state?.user?.onlineUser)
     let avatarName = ""
 
     if(name){
@@ -31,6 +32,7 @@ const Avatar = ({userId,name,imageUrl,width,height,className}) => {
 
     const randomNumber = Math.floor(Math.random() * 9)
 
+    const isOnline = onlineUser.includes(userId)
   return (
     <div className={`text-slate-800 border-[3px] rounded-full font-bold relative ${className}`} style={{width : width+"px", height : height+"px" }}>
         {
@@ -54,7 +56,11 @@ const Avatar = ({userId,name,imageUrl,width,height,className}) => {
                 )
             )
         }
-      
+        {
+          isOnline && (
+            <div className='bg-green-600 p-1 absolute bottom-2 -right-1 z-10 rounded-full'></div>
+          )
+        }
     </div>
   )
 }

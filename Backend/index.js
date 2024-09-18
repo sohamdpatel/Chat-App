@@ -6,8 +6,8 @@ dotenv.config({path: './config/.env',});
 import connectDB from './config/connnectDB.js';
 import router from './routes/user.route.js';
 import cookieParser from 'cookie-parser';
+import {app,server} from './socket/index.js'
 // make app of express
-const app = express();
 // configure cors
 app.use(cors({
     origin:process.env.FRONTEND_URL,
@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 8080;
 // connect to mongodb
 connectDB();
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 // test api server
